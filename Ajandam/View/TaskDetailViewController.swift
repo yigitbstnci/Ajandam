@@ -10,6 +10,7 @@
 import UIKit
 
 class TaskDetailViewController: UIViewController {
+    
     @IBOutlet weak var personalButton: UIButton!
     @IBOutlet weak var shoppingButton: UIButton!
     @IBOutlet weak var travelButton: UIButton!

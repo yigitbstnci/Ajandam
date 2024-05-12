@@ -145,7 +145,6 @@
                     </view>
                     <connections>
                         <outlet property="datepicker" destination="66Y-gm-e64" id="DY1-YF-M7l"/>
-                        <outlet property="description" destination="LnE-dR-Vgr" id="UuI-Z7-wUm"/>
                         <outlet property="detailDescription" destination="Rqz-5A-iSm" id="m5w-eE-ZMU"/>
                         <outlet property="personalButton" destination="vvT-qI-Pw5" id="cEP-Ix-yDp"/>
                         <outlet property="phoneButton" destination="LL5-Xm-LjH" id="SqF-mD-YL8"/>
