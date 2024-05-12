@@ -4,85 +4,77 @@
 //
 //  Created by Yigit Bostanci on 12.05.2024.
 //
+//MARK: manage the main screen displaying the list of tasks using a UICollectionView.
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+private let reuseIdentifier = "TaskCell"
 
-class TasksCollectionViewController: UICollectionViewController {
+class TasksCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout{
+    
+    var tasks: [Task] = [] //task data array
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
+        
+        title = "Ajandam"
+    
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
+        // load task from UserDefaults
+        tasks = TaskManager.shared.fetchTasks()
+        
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+    
+    @objc func addButtonTapped () {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailVc = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as! TaskDetailViewController
+        self.navigationController?.pushViewController(detailVc, animated: true)
+        
     }
-    */
-
+    
     // MARK: UICollectionViewDataSource
-
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 0
+        return tasks.count
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
-    
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TaskCell
+        let task = tasks[indexPath.item]
+        
+        cell.configure(with: task)
+        
+        
         return cell
     }
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSizeMake(view.frame.width, 100)
     }
-    */
+}
 
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
 
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
 
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
 
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
+
+
+
+//MARK: TaskCell
+
+class TaskCell: UICollectionViewCell {
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var taskTypeImage: UIImageView!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     
+    
+    
+    func configure (with task: Task) {
+        titleLabel.text = task.title
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.text = task.description
+        dateLabel.text = "Date Label Test"
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
+        taskTypeImage.translatesAutoresizingMaskIntoConstraints = false
     }
-    */
     
 }

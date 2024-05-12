@@ -9,23 +9,29 @@
 /* Begin PBXBuildFile section */
 		83A5A8202BF03BF1002C4F60 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A5A81F2BF03BF1002C4F60 /* AppDelegate.swift */; };
 		83A5A8222BF03BF1002C4F60 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A5A8212BF03BF1002C4F60 /* SceneDelegate.swift */; };
-		83A5A8242BF03BF1002C4F60 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A5A8232BF03BF1002C4F60 /* ViewController.swift */; };
 		83A5A8272BF03BF1002C4F60 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 83A5A8262BF03BF1002C4F60 /* Base */; };
 		83A5A82A2BF03BF1002C4F60 /* Ajandam.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 83A5A8282BF03BF1002C4F60 /* Ajandam.xcdatamodeld */; };
 		83A5A82C2BF03BF3002C4F60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83A5A82B2BF03BF3002C4F60 /* Assets.xcassets */; };
 		83A5A82F2BF03BF3002C4F60 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 83A5A82E2BF03BF3002C4F60 /* Base */; };
+		83E6CCBB2BF10659005C3E2E /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E6CCBA2BF10659005C3E2E /* Task.swift */; };
+		83E6CCC22BF10879005C3E2E /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E6CCC12BF10879005C3E2E /* TaskDetailViewController.swift */; };
+		83E6CCC62BF10A22005C3E2E /* TasksCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E6CCC32BF10A22005C3E2E /* TasksCollectionViewController.swift */; };
+		83E6CCC82BF10F1F005C3E2E /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E6CCC72BF10F1F005C3E2E /* TaskManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		83A5A81C2BF03BF1002C4F60 /* Ajandam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ajandam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83A5A81F2BF03BF1002C4F60 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83A5A8212BF03BF1002C4F60 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		83A5A8232BF03BF1002C4F60 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		83A5A8262BF03BF1002C4F60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		83A5A8292BF03BF1002C4F60 /* Ajandam.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Ajandam.xcdatamodel; sourceTree = "<group>"; };
 		83A5A82B2BF03BF3002C4F60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		83A5A82E2BF03BF3002C4F60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		83A5A8302BF03BF3002C4F60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83E6CCBA2BF10659005C3E2E /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		83E6CCC12BF10879005C3E2E /* TaskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
+		83E6CCC32BF10A22005C3E2E /* TasksCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksCollectionViewController.swift; sourceTree = "<group>"; };
+		83E6CCC72BF10F1F005C3E2E /* TaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +66,9 @@
 			children = (
 				83A5A81F2BF03BF1002C4F60 /* AppDelegate.swift */,
 				83A5A8212BF03BF1002C4F60 /* SceneDelegate.swift */,
-				83A5A8232BF03BF1002C4F60 /* ViewController.swift */,
+				83E6CCBC2BF10670005C3E2E /* Model */,
+				83E6CCBD2BF1068A005C3E2E /* View */,
+				83E6CCBE2BF10695005C3E2E /* Controller */,
 				83A5A8252BF03BF1002C4F60 /* Main.storyboard */,
 				83A5A82B2BF03BF3002C4F60 /* Assets.xcassets */,
 				83A5A82D2BF03BF3002C4F60 /* LaunchScreen.storyboard */,
@@ -68,6 +76,31 @@
 				83A5A8282BF03BF1002C4F60 /* Ajandam.xcdatamodeld */,
 			);
 			path = Ajandam;
+			sourceTree = "<group>";
+		};
+		83E6CCBC2BF10670005C3E2E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				83E6CCBA2BF10659005C3E2E /* Task.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		83E6CCBD2BF1068A005C3E2E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				83E6CCC32BF10A22005C3E2E /* TasksCollectionViewController.swift */,
+				83E6CCC12BF10879005C3E2E /* TaskDetailViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		83E6CCBE2BF10695005C3E2E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				83E6CCC72BF10F1F005C3E2E /* TaskManager.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,9 +174,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83E6CCC22BF10879005C3E2E /* TaskDetailViewController.swift in Sources */,
+				83E6CCC62BF10A22005C3E2E /* TasksCollectionViewController.swift in Sources */,
 				83A5A82A2BF03BF1002C4F60 /* Ajandam.xcdatamodeld in Sources */,
-				83A5A8242BF03BF1002C4F60 /* ViewController.swift in Sources */,
+				83E6CCBB2BF10659005C3E2E /* Task.swift in Sources */,
 				83A5A8202BF03BF1002C4F60 /* AppDelegate.swift in Sources */,
+				83E6CCC82BF10F1F005C3E2E /* TaskManager.swift in Sources */,
 				83A5A8222BF03BF1002C4F60 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
