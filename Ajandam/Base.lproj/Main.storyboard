@@ -91,24 +91,36 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="child"/>
+                                <connections>
+                                    <action selector="personalTapped:" destination="W4o-zt-0Yw" eventType="touchUpInside" id="NQZ-2e-MiA"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xit-HG-DJH">
                                 <rect key="frame" x="108" y="106" width="84" height="68"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="shopping-cart"/>
+                                <connections>
+                                    <action selector="shoppingTapped:" destination="W4o-zt-0Yw" eventType="touchUpInside" id="hMf-Pd-eoT"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pap-Hl-8Kl">
                                 <rect key="frame" x="200" y="106" width="84" height="68"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="travel"/>
+                                <connections>
+                                    <action selector="travelTapped:" destination="W4o-zt-0Yw" eventType="touchUpInside" id="E3q-5A-xi9"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LL5-Xm-LjH">
                                 <rect key="frame" x="292" y="106" width="84" height="68"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="phone"/>
+                                <connections>
+                                    <action selector="phoneTapped:" destination="W4o-zt-0Yw" eventType="touchUpInside" id="9vK-v7-8Yt"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="To-Do Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rqz-5A-iSm">
                                 <rect key="frame" x="38" y="206" width="176" height="34"/>

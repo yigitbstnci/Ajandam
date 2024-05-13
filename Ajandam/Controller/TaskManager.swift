@@ -12,7 +12,7 @@ class   TaskManager {
     private init() {}
     
     private var tasks: [Task] = [
-        Task(title: "Title",description: "Deneme" ,priority: "", date: Date())
+        Task(title: "Title",description: "Deneme" , date: Date())
 
 
     ]

@@ -13,13 +13,11 @@ import UIKit
 class Task {
     var title: String
     var description: String?
-    var priority: String
     var date: Date
     
-    init(title: String, description: String? = nil, priority: String, date: Date) {
+    init(title: String, description: String? = nil, date: Date) {
         self.title = title
         self.description = description
-        self.priority = priority
         self.date = date
     }
 }
