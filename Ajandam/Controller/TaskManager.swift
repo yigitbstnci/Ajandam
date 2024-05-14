@@ -12,9 +12,6 @@ class   TaskManager {
     private init() {}
     
     private var tasks: [Task] = [
-        Task(title: "Title",description: "Deneme" , date: Date())
-
-
     ]
     // Method to fetch tasks
     func fetchTasks() -> [Task] {

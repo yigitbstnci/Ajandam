@@ -109,7 +109,26 @@ class TaskDetailViewController: UIViewController {
 
     
     @IBAction func saveButton(_ sender: UIButton) {
+        var image = ""
+        //check which type selected
+        if personalButton.isSelected {
+            image = "child-selected"
+        }else if shoppingButton.isSelected {
+            image = "shopping-cart-selected"
+        }else if travelButton.isSelected {
+            image = "travel-selected"
+        }else if phoneButton.isSelected {
+            image = "phone-selected"
+        }
         
+        //check and set Task class
+        if todo == nil {
+            //set UUID for new task
+            let uuid = UUID().uuidString
+            todo = Task(id: uuid, title: todoTitle.text!, description: detailDescription.text!, date: datepicker.date,image: image)
+            tasks.append(todo!)
+            navigationController?.popViewController(animated: true)
+        }
         
     }
 

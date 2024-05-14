@@ -9,10 +9,11 @@
 import UIKit
 
 private let reuseIdentifier = "TaskCell"
+var tasks: [Task] = [] //task data array
 
 class TasksCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout{
     
-    var tasks: [Task] = [] //task data array
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,10 @@ class TasksCollectionViewController: UICollectionViewController, UICollectionVie
         // load task from UserDefaults
         tasks = TaskManager.shared.fetchTasks()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        collectionView.reloadData()
     }
     
     @objc func addButtonTapped () {
@@ -72,9 +77,13 @@ class TaskCell: UICollectionViewCell {
         titleLabel.text = task.title
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.text = task.description
-        dateLabel.text = "Date Label Test"
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM d, yyyy h:mm a"
+        let dateString = dateFormatter.string(from: task.date)
+        dateLabel.text = dateString
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        taskTypeImage.translatesAutoresizingMaskIntoConstraints = false
+        taskTypeImage.image = UIImage(named: task.image)
     }
     
 }
