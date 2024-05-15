@@ -126,7 +126,7 @@ class TaskDetailViewController: UIViewController {
             //set UUID for new task
             let uuid = UUID().uuidString
             todo = Task(id: uuid, title: todoTitle.text!, description: detailDescription.text!, date: datepicker.date,image: image)
-            tasks.append(todo!)
+            TaskManager.shared.addTask(todo!)
             navigationController?.popViewController(animated: true)
         }
         

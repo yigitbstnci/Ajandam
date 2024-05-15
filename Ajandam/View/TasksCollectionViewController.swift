@@ -13,21 +13,23 @@ var tasks: [Task] = [] //task data array
 
 class TasksCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout{
     
-   
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Ajandam"
-    
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
         // load task from UserDefaults
-        tasks = TaskManager.shared.fetchTasks()
+        //  tasks = TaskManager.shared.fetchTasks()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        tasks = TaskManager.shared.fetchTasks()
         collectionView.reloadData()
+        
     }
     
     @objc func addButtonTapped () {
@@ -55,6 +57,8 @@ class TasksCollectionViewController: UICollectionViewController, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSizeMake(view.frame.width, 100)
     }
+    
+    
 }
 
 

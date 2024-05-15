@@ -10,7 +10,7 @@ import UIKit
 
 //class for task
 
-class Task {
+class Task: Codable{
     var id: String
     var title: String
     var description: String
