@@ -28,6 +28,8 @@ class TaskDetailViewController: UIViewController {
         super.viewDidLoad()
         buttons = [personalButton,shoppingButton,travelButton,phoneButton]
         // Do any additional setup after loading the view.
+        let loc = Locale(identifier: "tr")
+        self.datepicker.locale = loc
     }
     
     

@@ -45,7 +45,7 @@ class   TaskManager {
         if let encodedData = UserDefaults.standard.data(forKey: "tasks"){
             do {
                 tasks = try JSONDecoder().decode([Task].self, from: encodedData)
-                print("Get data complate")
+                print("Get data complate } \(tasks)")
             }catch {
                 print("USerDefault decode error ")
             }

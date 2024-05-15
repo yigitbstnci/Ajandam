@@ -4,70 +4,120 @@
 //
 //  Created by Yigit Bostanci on 12.05.2024.
 //
-//MARK: manage the main screen displaying the list of tasks using a UICollectionView.
+// MARK: - manage the main screen displaying the list of tasks using a UICollectionView.
 
 import UIKit
 
 private let reuseIdentifier = "TaskCell"
-var tasks: [Task] = [] //task data array
+var tasks: [Task] = [] // Task data array
+var selectedCellIds: [String] = []
 
-class TasksCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout{
+class TasksCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    // MARK: - Fetch Data
     
+    func fetchData() {
+        tasks = TaskManager.shared.fetchTasks()
+        collectionView.reloadData()
+    }
+    
+    // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         title = "Ajandam"
-        
+        collectionView.allowsSelection = false
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
-        // load task from UserDefaults
-        //  tasks = TaskManager.shared.fetchTasks()
-        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editButtonTapped))
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        tasks = TaskManager.shared.fetchTasks()
-        collectionView.reloadData()
-        
+        super.viewWillAppear(animated)
+        fetchData()
     }
     
-    @objc func addButtonTapped () {
+    // MARK: - Button Actions
+    
+    @objc func addButtonTapped() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let detailVc = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as! TaskDetailViewController
-        self.navigationController?.pushViewController(detailVc, animated: true)
-        
+        let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as! TaskDetailViewController
+        navigationController?.pushViewController(detailVC, animated: true)
     }
     
-    // MARK: UICollectionViewDataSource
+    @objc func editButtonTapped() {
+        collectionView.allowsMultipleSelection = true
+        collectionView.allowsSelection = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteButtonTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done , target: self, action: #selector(closeEditMode))
+    }
+    
+    @objc func deleteButtonTapped() {
+        collectionView.allowsMultipleSelection = false
+        collectionView.allowsSelection = false
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editButtonTapped))
+        
+        // Deselect the selected item and set the background color to white
+        for indexPath in collectionView.indexPathsForVisibleItems {
+            collectionView.deselectItem(at: indexPath, animated: true)
+            let cell = collectionView.cellForItem(at: indexPath)
+            cell?.backgroundColor = .white
+        }
+        
+        // Remove the selected tasks
+        for id in selectedCellIds {
+            if let index = tasks.firstIndex(where: { $0.id == id }) {
+                TaskManager.shared.deleteTask(at: index)
+            }
+        }
+        
+        // Reload collection view data
+        fetchData()
+    }
+    
+    @objc func closeEditMode() {
+        collectionView.allowsMultipleSelection = false
+        collectionView.allowsSelection = false
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editButtonTapped))
+        collectionView.visibleCells.forEach {$0.backgroundColor = .white}
+    }
+    
+    // MARK: - UICollectionViewDataSource
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
         return tasks.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TaskCell
         let task = tasks[indexPath.item]
-        
         cell.configure(with: task)
-        
-        
         return cell
     }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSizeMake(view.frame.width, 100)
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.backgroundColor = .lightGray
+        let selectedId = tasks[indexPath.item].id
+        selectedCellIds.append(selectedId)
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.backgroundColor = .white
+        let deselectedId = tasks[indexPath.item].id
+        if let index = selectedCellIds.firstIndex(of: deselectedId) {
+            selectedCellIds.remove(at: index)
+        }
+    }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 100)
+    }
 }
 
-
-
-
-
-
-
-//MARK: TaskCell
+// MARK: - TaskCell
 
 class TaskCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
@@ -75,19 +125,14 @@ class TaskCell: UICollectionViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
-    
-    
-    func configure (with task: Task) {
+    func configure(with task: Task) {
         titleLabel.text = task.title
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.text = task.description
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MMM d, yyyy h:mm a"
+        dateFormatter.dateFormat = "dd MMM yyyy HH:mm"
         let dateString = dateFormatter.string(from: task.date)
         dateLabel.text = dateString
-        dateLabel.translatesAutoresizingMaskIntoConstraints = false
         taskTypeImage.image = UIImage(named: task.image)
+        descriptionLabel.sizeToFit()
     }
-    
 }
