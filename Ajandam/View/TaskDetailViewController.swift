@@ -22,7 +22,7 @@ class TaskDetailViewController: UIViewController {
     var todo: Task?
    
     var buttons: [UIButton] = []
-    
+    var selectedID: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +30,41 @@ class TaskDetailViewController: UIViewController {
         // Do any additional setup after loading the view.
         let loc = Locale(identifier: "tr")
         self.datepicker.locale = loc
+        
+        //Edit Task Controller
+        if selectedID != "" {
+            //show selected object detail
+            let tasks = TaskManager.shared.fetchTasks()
+            if tasks.count > 0 {
+                for task in tasks {
+                    if task.id == selectedID {
+                        todoTitle.text = task.title
+                        detailDescription.text = task.description
+                        datepicker.date = task.date
+//                        if task.image == "phone-selected" {
+//                            phoneButton.isSelected = true
+//                            phoneButton.setImage(UIImage(named: task.image))
+//                        }
+                        switch task.image {
+                        case "phone-selected":
+                            phoneButton.isSelected = true
+                            phoneButton.setImage(UIImage(named: task.image), for: .normal)
+                        case "shopping-cart-selected":
+                            shoppingButton.isSelected = true
+                            shoppingButton.setImage(UIImage(named: task.image), for: .normal)
+                        case "child-selected":
+                            personalButton.isSelected = true
+                            personalButton.setImage(UIImage(named: task.image), for: .normal)
+                        case "travel-selected" :
+                            travelButton.isSelected = true
+                            travelButton.setImage(UIImage(named: task.image), for: .normal)
+                        default:
+                            break
+                        }
+                    }
+                }
+            }
+        }
     }
     
     

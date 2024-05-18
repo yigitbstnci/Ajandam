@@ -61,10 +61,8 @@ class TasksCollectionViewController: UICollectionViewController, UICollectionVie
         selectedCellIds.append(selectedId)
         if selectedCellIds.count == 1 {
             floatButton.isHidden = false
-            print("burda kaldı 1 ")
         }else {
             floatButton.isHidden = true
-            print("burda kaldı 2")
         }
     }
     
@@ -76,14 +74,10 @@ class TasksCollectionViewController: UICollectionViewController, UICollectionVie
             selectedCellIds.remove(at: index)
             if selectedCellIds.isEmpty {
                 floatButton.isHidden = true
-                print("burda kaldı 3 ")
             }else if selectedCellIds.count > 1 {
                 floatButton.isHidden = true
-                print("burda kaldı 4 ")
             }else   {
                 floatButton.isHidden = false
-                print("burda kaldı 5 ")
-                print("\(selectedCellIds)")
             }
         }
     }
@@ -136,6 +130,7 @@ class TasksCollectionViewController: UICollectionViewController, UICollectionVie
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editButtonTapped))
         collectionView.visibleCells.forEach {$0.backgroundColor = .white}
         floatButton.isHidden = true
+        selectedCellIds.removeAll(keepingCapacity: false)
     }
     
     func deleteFunc(alert: UIAlertAction) {
@@ -170,7 +165,12 @@ class TasksCollectionViewController: UICollectionViewController, UICollectionVie
     @objc func floatButtonTapped() {
         //selected task ID navigate to detailpage to show
         if let selectedTaskID = selectedCellIds.first {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as! TaskDetailViewController
+            detailVC.selectedID = selectedTaskID
+            navigationController?.pushViewController(detailVC, animated: true)
         }
+        closeEditMode()
        
     }
 }
