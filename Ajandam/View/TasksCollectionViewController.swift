@@ -176,39 +176,6 @@ class TasksCollectionViewController: UICollectionViewController, UICollectionVie
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // MARK: - TaskCell
 
 class TaskCell: UICollectionViewCell {

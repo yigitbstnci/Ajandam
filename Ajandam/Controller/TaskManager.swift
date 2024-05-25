@@ -41,6 +41,12 @@ class   TaskManager {
             print("UserDefault Encode Error")
         }
     }
+    
+    
+    func updateTask(_ updatedTask: Task , at index: Int) {
+        tasks[index] = updatedTask
+        saveTasks()
+        }
     func loadTasks(){
         if let encodedData = UserDefaults.standard.data(forKey: "tasks"){
             do {

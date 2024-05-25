@@ -170,6 +170,7 @@
                         <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="20" bottom="0.0" trailing="20"/>
                     </view>
                     <connections>
+                        <outlet property="SaveButton" destination="of5-hJ-vx3" id="wS4-g2-Sgp"/>
                         <outlet property="datepicker" destination="66Y-gm-e64" id="DY1-YF-M7l"/>
                         <outlet property="detailDescription" destination="LnE-dR-Vgr" id="NvV-Gd-i19"/>
                         <outlet property="personalButton" destination="vvT-qI-Pw5" id="cEP-Ix-yDp"/>

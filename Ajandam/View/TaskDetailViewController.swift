@@ -11,6 +11,8 @@ import UIKit
 
 class TaskDetailViewController: UIViewController {
     
+    var UpdateData: Bool = false
+    
     @IBOutlet weak var personalButton: UIButton!
     @IBOutlet weak var shoppingButton: UIButton!
     @IBOutlet weak var travelButton: UIButton!
@@ -19,6 +21,7 @@ class TaskDetailViewController: UIViewController {
     @IBOutlet weak var detailDescription: UITextField!
     @IBOutlet weak var datepicker: UIDatePicker!
   
+    @IBOutlet weak var SaveButton: UIButton!
     var todo: Task?
    
     var buttons: [UIButton] = []
@@ -30,9 +33,11 @@ class TaskDetailViewController: UIViewController {
         // Do any additional setup after loading the view.
         let loc = Locale(identifier: "tr")
         self.datepicker.locale = loc
-        
         //Edit Task Controller
-        if selectedID != "" {
+        if selectedID != nil {
+            UpdateData = true
+            SaveButton.titleLabel?.text  = "SaveChanges"
+            SaveButton.translatesAutoresizingMaskIntoConstraints = true
             //show selected object detail
             let tasks = TaskManager.shared.fetchTasks()
             if tasks.count > 0 {
@@ -146,27 +151,49 @@ class TaskDetailViewController: UIViewController {
 
     
     @IBAction func saveButton(_ sender: UIButton) {
-        var image = ""
-        //check which type selected
-        if personalButton.isSelected {
-            image = "child-selected"
-        }else if shoppingButton.isSelected {
-            image = "shopping-cart-selected"
-        }else if travelButton.isSelected {
-            image = "travel-selected"
-        }else if phoneButton.isSelected {
-            image = "phone-selected"
+        switch UpdateData {
+        case  false :
+            var image = ""
+            //check which type selected
+            if personalButton.isSelected {
+                image = "child-selected"
+            }else if shoppingButton.isSelected {
+                image = "shopping-cart-selected"
+            }else if travelButton.isSelected {
+                image = "travel-selected"
+            }else if phoneButton.isSelected {
+                image = "phone-selected"
+            }
+            
+            //check and set Task class
+            if todo == nil {
+                //set UUID for new task
+                let uuid = UUID().uuidString
+                todo = Task(id: uuid, title: todoTitle.text!, description: detailDescription.text!, date: datepicker.date,image: image)
+                TaskManager.shared.addTask(todo!)
+                navigationController?.popViewController(animated: true)
+            }
+        case true :
+            if let selectedID = selectedID {
+                if let index = tasks.firstIndex(where: {$0.id == selectedID}) {
+                    var image = ""
+                    //check which type selected
+                    if personalButton.isSelected {
+                        image = "child-selected"
+                    }else if shoppingButton.isSelected {
+                        image = "shopping-cart-selected"
+                    }else if travelButton.isSelected {
+                        image = "travel-selected"
+                    }else if phoneButton.isSelected {
+                        image = "phone-selected"
+                    }
+                    //set updated task
+                    let updatedTodo = Task(id: selectedID, title: todoTitle.text!, description: detailDescription.text!, date: datepicker.date,image: image)
+                    //send TaskManager Task Object with matched object index
+                    TaskManager.shared.updateTask(updatedTodo, at: index)
+                }
+            }
         }
-        
-        //check and set Task class
-        if todo == nil {
-            //set UUID for new task
-            let uuid = UUID().uuidString
-            todo = Task(id: uuid, title: todoTitle.text!, description: detailDescription.text!, date: datepicker.date,image: image)
-            TaskManager.shared.addTask(todo!)
-            navigationController?.popViewController(animated: true)
-        }
-        
     }
 
 }
