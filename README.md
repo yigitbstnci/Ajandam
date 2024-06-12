@@ -10,7 +10,5 @@ Can edit and delete task.
 - Codeble Class
 
 #### Ajandam In App ScreenShot
-![App Screenshot](https://github.com/yigitbstnci/Ajandam/assets/120344683/ae8c4066-fcb6-4450-b617-3a26904263f8)
-
-
+<img src="[https://github.com/yigitbstnci/Ajandam/assets/120344683/ae8c4066-fcb6-4450-b617-3a26904263f8](https://github.com/yigitbstnci/Ajandam/assets/120344683/ae8c4066-fcb6-4450-b617-3a26904263f8)" alt="App Screenshot" width="350" height="700">
 
