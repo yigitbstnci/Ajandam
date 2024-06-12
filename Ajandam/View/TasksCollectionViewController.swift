@@ -32,7 +32,7 @@ class TasksCollectionViewController: UICollectionViewController, UICollectionVie
         collectionView.allowsSelection = false
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editButtonTapped))
-        
+        createFloatButton(with: "list.bullet.indent", target: self, action: #selector(filterbuttonaction), hidden: false)
         
     }
     
@@ -99,7 +99,7 @@ class TasksCollectionViewController: UICollectionViewController, UICollectionVie
         collectionView.allowsSelection = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteButtonTapped))
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done , target: self, action: #selector(closeEditMode))
-        createFloatButton()
+        createFloatButton(with: "pencil", target: self, action: #selector(floatButtonTapped), hidden: true)
     }
     
     
@@ -146,8 +146,8 @@ class TasksCollectionViewController: UICollectionViewController, UICollectionVie
     }
 
     
-    func createFloatButton () {
-        floatButton.setImage(UIImage(named: "pencil"), for: .normal)
+    func createFloatButton (with imageName: String , target: Any? , action: Selector, hidden: Bool) {
+        floatButton.setImage(UIImage(named: imageName), for: .normal)
         floatButton.backgroundColor = .systemBlue
         floatButton.setTitleColor(.white, for: .normal)
         floatButton.layer.cornerRadius = 25
@@ -158,8 +158,8 @@ class TasksCollectionViewController: UICollectionViewController, UICollectionVie
         floatButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         floatButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         floatButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        floatButton.addTarget(self, action: #selector(floatButtonTapped), for: .touchUpInside)
-        floatButton.isHidden = true
+        floatButton.addTarget(target, action: action, for: .touchUpInside)
+        floatButton.isHidden = hidden
     }
     
     @objc func floatButtonTapped() {
@@ -171,7 +171,9 @@ class TasksCollectionViewController: UICollectionViewController, UICollectionVie
             navigationController?.pushViewController(detailVC, animated: true)
         }
         closeEditMode()
-       
+    }
+    @objc func filterbuttonaction() {
+        
     }
 }
 

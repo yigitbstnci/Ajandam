@@ -191,6 +191,8 @@ class TaskDetailViewController: UIViewController {
                     let updatedTodo = Task(id: selectedID, title: todoTitle.text!, description: detailDescription.text!, date: datepicker.date,image: image)
                     //send TaskManager Task Object with matched object index
                     TaskManager.shared.updateTask(updatedTodo, at: index)
+                    navigationController?.popViewController(animated: true)
+
                 }
             }
         }
